@@ -1,0 +1,16 @@
+{
+  "name": "testefullstack",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "start:dev": "npm run install:all && concurrently \"cd backend && npm run start:dev\" \"cd frontend && npm run dev\"",
+    "dev": "npm run start:dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
