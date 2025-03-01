@@ -1,0 +1,64 @@
+service: testefullstack-serverless
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    MONGODB_URI: ${env:MONGODB_URI}
+    NODE_ENV: ${env:NODE_ENV, 'development'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+
+custom:
+  bucket: testefullstack-uploads-${self:provider.stage}
+  serverless-offline:
+    httpPort: 3001
+    lambdaPort: 3002
+
+functions:
+  api:
+    handler: src/lambda.handler
+    events:
+      - http:
+          path: /categories
+          method: ANY
+          cors: true
+      - http:
+          path: /categories/{proxy+}
+          method: ANY
+          cors: true
+      - http:
+          path: /products
+          method: ANY
+          cors: true
+      - http:
+          path: /products/{proxy+}
+          method: ANY
+          cors: true
+      - http:
+          path: /orders
+          method: ANY
+          cors: true
+      - http:
+          path: /orders/{proxy+}
+          method: ANY
+          cors: true
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+package:
+  patterns:
+    - '!node_modules/.prisma/client/libquery_engine-*'
+    - '!node_modules/prisma/libquery_engine-*'
+    - '!node_modules/@prisma/client/libquery_engine-*'
+    - '!node_modules/**/*.md'
+    - '!node_modules/**/*.txt'
+    - '!.git/**'

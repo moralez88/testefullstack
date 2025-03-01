@@ -1,0 +1,32 @@
+{
+  "name": "testefullstack-serverless",
+  "version": "1.0.0",
+  "description": "Configuração Serverless do projeto",
+  "scripts": {
+    "deploy": "serverless deploy",
+    "remove": "serverless remove",
+    "dev": "serverless offline start",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/platform-express": "^10.0.0",
+    "@vendia/serverless-express": "^4.10.4",
+    "aws-lambda": "^1.0.7",
+    "dotenv": "^16.3.1",
+    "mongodb": "^5.0.0",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
+    "@types/node": "^20.4.5",
+    "serverless": "^3.34.0",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-offline": "^12.0.4",
+    "serverless-plugin-typescript": "^2.1.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
+  }
+}
